@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>STOCKSHOCK · Inventory Planner</title>
+<meta name="description" content="STOCKSHOCK forecasts travel demand and builds a risk-capped pre-buy plan for hotels, flights and activities in any destination.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M19 2 6 18h8l-3 12 15-18h-9z' fill='%23FFD21F'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Lato:wght@400;700;900&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="streaks" aria-hidden="true"></canvas>
+
+<nav class="nav">
+  <a class="logo" href="#top" aria-label="STOCKSHOCK home">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19 2 6 18h8l-3 12 15-18h-9z"/></svg>
+    <span>STOCK<b>SHOCK</b></span>
+  </a>
+  <div class="nav-links">
+    <a href="#planner">Planner</a>
+    <a href="#how">How it works</a>
+    <a href="#api">API</a>
+    <a class="btn btn-ghost" href="/docs" target="_blank" rel="noopener">API docs ↗</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-copy">
+    <p class="eyebrow">VoyageHack 4.0 · Inventory Optimization · Team Table For Two</p>
+    <h1>Pre-buy the right rooms, seats and passes. <span class="hl">Before the rush.</span></h1>
+    <p class="lede">STOCKSHOCK forecasts demand for every hotel, route and activity, then invests your pre-buy budget like a risk-managed portfolio: more profit, less unsold stock, and a hard cap on the worst case.</p>
+    <div class="hero-cta">
+      <a class="btn btn-volt" href="#planner">Open the planner</a>
+      <a class="btn btn-ghost" href="#api">Use the API</a>
+    </div>
+    <div class="hero-proof" id="heroProof" aria-live="polite">
+      <div><b data-k="dest">34</b><span>destinations ready, or add your own</span></div>
+      <div><b data-k="secs">~1 s</b><span>to build an 8-week plan</span></div>
+      <div><b data-k="gain">—</b><span id="heroGainLabel">extra profit vs today's rule</span></div>
+    </div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <div class="bolt-wrap">
+      <svg class="bolt" viewBox="0 0 120 160"><path d="M74 4 18 92h36l-14 64 64-92H66z"/></svg>
+      <div class="orbit o1"></div><div class="orbit o2"></div>
+    </div>
+  </div>
+</header>
+
+<div class="ticker" aria-label="Recent decisions">
+  <div class="ticker-track" id="ticker"></div>
+</div>
+
+<main>
+  <section class="planner" id="planner">
+    <div class="section-head">
+      <p class="eyebrow">Live planner</p>
+      <h2>Pick a destination. Get a buy plan.</h2>
+    </div>
+
+    <div class="planner-grid">
+      <aside class="side card">
+        <label class="sr" for="search">Search destinations</label>
+        <input id="search" type="search" placeholder="Search 34 destinations…" autocomplete="off">
+        <div class="map" id="map" role="application" aria-label="Destination map"></div>
+        <p class="map-hint" id="mapHint">Click a pin to plan for that destination.</p>
+        <div class="dest-list" id="destList" role="listbox" aria-label="Destinations"></div>
+        <button class="btn btn-outline wide" id="addCityBtn" type="button">＋ Add your own city</button>
+      </aside>
+
+      <div class="results">
+        <div class="controls card">
+          <div class="dest-title">
+            <div>
+              <p class="eyebrow" id="destMeta">Beach · West India</p>
+              <h3 id="destName">Goa</h3>
+            </div>
+            <div class="status" id="status" aria-live="polite"></div>
+          </div>
+          <div class="ctrl-row">
+            <div class="ctrl">
+              <label for="start">First week</label>
+              <input id="start" type="date">
+            </div>
+            <div class="ctrl">
+              <span class="lab" id="weeksLab">Horizon</span>
+              <div class="seg" role="radiogroup" aria-labelledby="weeksLab" id="weeksSeg">
+                <button type="button" role="radio" data-v="4">4 wks</button>
+                <button type="button" role="radio" data-v="8" aria-checked="true">8 wks</button>
+                <button type="button" role="radio" data-v="12">12 wks</button>
+              </div>
+            </div>
+            <div class="ctrl grow">
+              <label for="budget">Budget <output id="budgetOut">100%</output> <span class="muted">of today's rule</span></label>
+              <input id="budget" type="range" min="60" max="140" step="5" value="100">
+            </div>
+            <div class="ctrl">
+              <span class="lab" id="riskLab">Risk appetite</span>
+              <div class="seg" role="radiogroup" aria-labelledby="riskLab" id="riskSeg">
+                <button type="button" role="radio" data-v="careful">Careful</button>
+                <button type="button" role="radio" data-v="balanced" aria-checked="true">Balanced</button>
+                <button type="button" role="radio" data-v="bold">Bold</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="kpis" id="kpis"></div>
+        <div class="replay card" id="replay" hidden></div>
+
+        <div class="card chart-card">
+          <div class="card-head">
+            <h4>Demand forecast &amp; what to pre-buy</h4>
+            <div class="tabs" id="prodTabs" role="tablist" aria-label="Products"></div>
+          </div>
+          <div class="chart-wrap"><svg id="demandChart" viewBox="0 0 760 300" role="img" aria-label="Weekly demand forecast and pre-buy quantities"></svg></div>
+          <div class="legend">
+            <span><i class="sw band"></i>Forecast range (low–high)</span>
+            <span><i class="sw likely"></i>Likely demand</span>
+            <span><i class="sw ly"></i>Last year</span>
+            <span><i class="sw ss"></i>STOCKSHOCK pre-buy</span>
+            <span><i class="sw today"></i>Today's rule</span>
+          </div>
+        </div>
+
+        <div class="card plan-card">
+          <div class="card-head">
+            <h4>Buy plan</h4>
+            <div class="tabs" id="weekTabs" role="tablist" aria-label="Weeks"></div>
+          </div>
+          <div class="plan-list" id="planList"></div>
+          <div class="approve-bar">
+            <div><b id="apprCount">0</b> lines approved · <b id="apprSpend">₹0</b> committed</div>
+            <div class="approve-actions">
+              <button class="btn btn-outline" id="approveAll" type="button">Approve all BUY lines</button>
+              <button class="btn btn-volt" id="csvBtn" type="button">Download buy list (CSV)</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card frontier-card">
+          <div class="card-head">
+            <h4>Inventory as an investment portfolio</h4>
+            <span class="muted" id="frontierNote">Each dot is the best plan at that level of risk.</span>
+          </div>
+          <div class="chart-wrap"><svg id="frontierChart" viewBox="0 0 760 300" role="img" aria-label="Risk versus expected profit"></svg></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" id="how">
+    <div class="section-head">
+      <p class="eyebrow">How it works</p>
+      <h2>From search signals to a signed-off buy list</h2>
+    </div>
+    <ol class="steps">
+      <li><span class="n">01</span><h5>Ingest</h5><p>Bookings, searches, sold-outs, supplier prices and the festival calendar, week by week.</p></li>
+      <li><span class="n">02</span><h5>Signals</h5><p>Seasons, Diwali and summer peaks, growth, and early search demand ~6 weeks ahead.</p></li>
+      <li><span class="n">03</span><h5>Forecast</h5><p>Gradient-boosted low / likely / high demand, calibrated so ~8 in 10 weeks land inside the range.</p></li>
+      <li><span class="n">04</span><h5>Optimise</h5><p>Tests every plan on 60 demand scenarios: max profit within budget and a cap on the worst 5% loss.</p></li>
+      <li><span class="n">05</span><h5>Decide</h5><p>BUY, WAIT or SKIP for each line, with the reason. A buyer approves before anything is spent.</p></li>
+    </ol>
+  </section>
+
+  <section class="api" id="api">
+    <div class="section-head">
+      <p class="eyebrow">Open API</p>
+      <h2>Plug STOCKSHOCK into any booking system</h2>
+    </div>
+    <div class="api-grid">
+      <div class="card">
+        <h4>Endpoints</h4>
+        <ul class="endpoints">
+          <li><code class="m get">GET</code><code>/api/catalog</code><span>destinations and season types</span></li>
+          <li><code class="m get">GET</code><code>/api/plan?dest=goa&amp;weeks=8</code><span>forecast, buy plan, KPIs, last-year replay</span></li>
+          <li><code class="m post">POST</code><code>/api/plan</code><span>same, for any city you describe</span></li>
+          <li><code class="m get">GET</code><code>/api/frontier?dest=goa</code><span>best profit at each risk level</span></li>
+        </ul>
+        <a class="btn btn-ghost" href="/docs" target="_blank" rel="noopener">Interactive API docs ↗</a>
+      </div>
+      <div class="card">
+        <h4>Try it from a terminal</h4>
+        <pre class="code" id="curl"></pre>
+        <button class="btn btn-outline" id="copyCurl" type="button">Copy</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div>STOCK<b>SHOCK</b> · VoyageHack 4.0 · Table For Two — Aaradhya Jain &amp; Aaditya Kore</div>
+  <div class="muted">Demand history is simulated because TBO's booking data is not public. The same engine runs on a CSV export of real bookings.</div>
+</footer>
+
+<dialog id="cityDialog" class="dialog">
+  <form method="dialog" id="cityForm">
+    <h3>Add your own city</h3>
+    <p class="muted">STOCKSHOCK builds its products, prices and seasons from what you choose. Click the map to drop its pin (optional).</p>
+    <label for="cName">City name</label>
+    <input id="cName" required maxlength="40" placeholder="e.g. Coorg">
+    <label for="cType">Season pattern</label>
+    <select id="cType"></select>
+    <svg id="cSpark" viewBox="0 0 240 48" aria-hidden="true"></svg>
+    <div class="two">
+      <div><label for="cPop">Popularity <output id="cPopOut">3</output>/5</label><input id="cPop" type="range" min="1" max="5" value="3"></div>
+      <div><label for="cPrice">Price level <output id="cPriceOut">1.0×</output></label><input id="cPrice" type="range" min="0.5" max="2.5" step="0.1" value="1"></div>
+    </div>
+    <div class="two">
+      <div><label for="cHub">Fly in from</label><select id="cHub"><option>DEL</option><option>BOM</option><option>BLR</option><option>MAA</option><option>CCU</option><option>HYD</option></select></div>
+      <div><label for="cApt">Airport code</label><input id="cApt" maxlength="3" placeholder="auto"></div>
+    </div>
+    <p class="pin" id="cPin">No pin yet · click here, then click the map to drop one (optional).</p>
+    <div class="dialog-actions">
+      <button class="btn btn-ghost" value="cancel" type="button" id="cCancel">Cancel</button>
+      <button class="btn btn-volt" id="cGo" type="submit">Plan this city</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script id="leafletjs" async src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
