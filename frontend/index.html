@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>STOCKSHOCK · Inventory command centre</title>
+<meta name="description" content="STOCKSHOCK forecasts demand for flights, hotels and experiences in any of 171,567 cities, then builds and books a risk-capped pre-buy plan.">
+<meta name="theme-color" content="#07060f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M19 2 6 18h8l-3 12 15-18h-9z' fill='%23FFD21F'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Lato:wght@400;700;900&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="preload" href="data/globe.json" as="fetch" crossorigin>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="on-landing">
+<canvas id="streaks" aria-hidden="true"></canvas>
+
+<!-- ================= LANDING ================= -->
+<section class="landing" id="landing" aria-label="STOCKSHOCK">
+  <div class="fx" aria-hidden="true">
+    <canvas id="sparks"></canvas>
+    <i class="blob b1"></i><i class="blob b2"></i>
+    <i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><i class="orb o4"></i><i class="orb o5"></i><i class="orb o6"></i><i class="orb o7"></i>
+  </div>
+  <nav class="lnav">
+    <a class="logo" href="#/" aria-label="STOCKSHOCK home"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19 2 6 18h8l-3 12 15-18h-9z"/></svg><span>STOCK<b>SHOCK</b></span></a>
+    <div class="lnav-r">
+      <span class="live-pill" id="livePill"><i></i><span id="liveTxt">Connecting…</span></span>
+      <a class="btn btn-volt" href="#/console/overview">Enter command centre →</a>
+    </div>
+  </nav>
+  <div class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow rv">VoyageHack 4.0 · Inventory optimisation · Team Table For Two</p>
+      <h1 class="rv">The command centre for <span class="rotator" id="rotator"><span>flight seats</span></span><br><span class="hl">every city on Earth.</span></h1>
+      <p class="lede rv">Pick any route or city. STOCKSHOCK forecasts demand for flights, hotels and experiences, invests the pre-buy budget like a risk-managed portfolio, and books it in one click.</p>
+      <div class="cta rv">
+        <a class="btn btn-volt btn-lg" href="#/console/overview" id="enterBtn">Enter command centre <span aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost btn-lg" href="#/console/flights">Plan a route</a>
+      </div>
+      <div class="stats rv">
+        <div><b data-count="171567">0</b><span>cities</span></div>
+        <div><b data-count="4010">0</b><span>airports, auto-matched</span></div>
+        <div><b data-count="60">0</b><span>scenarios per plan</span></div>
+        <div><b>&lt;1 s</b><span>to build a plan</span></div>
+        <div><b>8</b><span>destinations per portfolio</span></div>
+      </div>
+    </div>
+    <div class="hero-globe">
+      <canvas id="globe" aria-label="Interactive globe: drag to rotate"></canvas>
+      <div class="globe-halo" aria-hidden="true"></div>
+      <span class="drag-hint" id="dragHint">⟲ drag to spin the planet</span>
+    </div>
+  </div>
+  <div class="modules-row">
+    <a class="mod-card rv" href="#/console/portfolio"><span class="mi">💼</span><b>Portfolio</b><small>One rupee budget split across destinations and weeks.</small></a>
+    <a class="mod-card rv" href="#/console/radar"><span class="mi">📡</span><b>Radar</b><small>Ranked opportunities with the signals behind them.</small></a>
+    <a class="mod-card rv" href="#/console/flights"><span class="mi">✈</span><b>Flights</b><small>Any origin → any destination. Seat blocks by week.</small></a>
+    <a class="mod-card rv" href="#/console/hotels"><span class="mi">🏨</span><b>Hotels</b><small>Business, airport and leisure stays, forecast separately.</small></a>
+    <a class="mod-card rv" href="#/console/experiences"><span class="mi">🎟</span><b>Experiences</b><small>Passes, tours and transfers for any city.</small></a>
+    <a class="mod-card rv" href="#/console/orders"><span class="mi">🧾</span><b>Orders</b><small>Every booking across modules, confirmed in one place.</small></a>
+  </div>
+</section>
+
+<!-- ================= CONSOLE ================= -->
+<div class="console" id="console" hidden>
+  <aside class="rail" aria-label="Modules">
+    <a class="logo small" href="#/" aria-label="Back to landing"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M19 2 6 18h8l-3 12 15-18h-9z"/></svg></a>
+    <nav>
+      <a href="#/console/overview" data-mod="overview"><span>◎</span><em>Overview</em></a>
+      <a href="#/console/radar" data-mod="radar"><span>📡</span><em>Radar</em></a>
+      <a href="#/console/portfolio" data-mod="portfolio"><span>💼</span><em>Portfolio</em></a>
+      <a href="#/console/flights" data-mod="flights"><span>✈</span><em>Flights</em></a>
+      <a href="#/console/hotels" data-mod="hotels"><span>🏨</span><em>Hotels</em></a>
+      <a href="#/console/experiences" data-mod="experiences"><span>🎟</span><em>Experiences</em></a>
+      <a href="#/console/orders" data-mod="orders"><span>🧾</span><em>Orders</em><i class="badge-n" id="railCount" hidden>0</i></a>
+    </nav>
+  </aside>
+
+  <header class="topbar">
+    <div class="crumbs"><span class="muted">Command centre</span> / <b id="crumb">Overview</b></div>
+    <div class="top-r">
+      <span class="tele"><i class="dot ok" id="teleDot"></i><span id="teleTxt">engine —</span></span>
+      <span class="tele mono" id="clock">--:--:-- IST</span>
+      <a class="cart" href="#/console/orders" aria-label="Orders"><span>🧾</span><b id="cartTotal">₹0</b><i id="cartCount">0</i></a>
+    </div>
+  </header>
+
+  <main class="stage" id="stage">
+    <!-- OVERVIEW -->
+    <section class="view" data-view="overview" aria-label="Overview">
+      <div class="ov-head">
+        <div>
+          <p class="eyebrow">Mission control</p>
+          <h2 class="title">Good <span id="greet">day</span>. What are we pre-buying?</h2>
+          <p class="muted">Each module plans and books on its own: pick a route in Flights, a city in Hotels, another city in Experiences.</p>
+        </div>
+        <canvas id="miniGlobe" class="mini-globe" aria-hidden="true"></canvas>
+      </div>
+      <div class="kpis" id="ovKpis"></div>
+      <div class="ov-grid">
+        <a class="launch" href="#/console/portfolio" style="--c:var(--good)"><span>💼</span><b>Portfolio</b><small>Give one rupee budget; it splits it across destinations, products and weeks.</small><em>Open →</em></a>
+        <a class="launch" href="#/console/radar" style="--c:var(--pink)"><span>📡</span><b>Opportunity radar</b><small>Ranks where, what and when to pre-buy, with the signals behind each pick.</small><em>Open →</em></a>
+        <a class="launch" href="#/console/flights" style="--c:var(--volt)"><span>✈</span><b>Flights</b><small>Choose where from and where to. Any of 4,010 airports, no codes to type.</small><em>Open →</em></a>
+        <a class="launch" href="#/console/hotels" style="--c:var(--violet)"><span>🏨</span><b>Hotels</b><small>Business, airport and leisure hotels in any city, each with its own season.</small><em>Open →</em></a>
+        <a class="launch" href="#/console/experiences" style="--c:var(--orange)"><span>🎟</span><b>Experiences</b><small>Ski passes, safaris, city passes and transfers.</small><em>Open →</em></a>
+      </div>
+      <div class="two">
+        <div class="card"><div class="card-head"><h4>📡 Live alerts</h4><a class="link" href="#/console/radar">Open radar →</a></div><div id="ovAlerts"><div class="shimmer-line"></div><div class="shimmer-line short"></div></div></div>
+        <div class="card"><div class="card-head"><h4>Where to look this week</h4><span class="muted small">top opportunities</span></div><div id="ovTop"></div></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h4>Recent orders</h4><a class="link" href="#/console/orders">All orders →</a></div>
+        <div id="ovOrders"></div>
+      </div>
+    </section>
+
+    <!-- PLANNER (shared by flights / hotels / experiences) -->
+    <section class="view" data-view="planner" aria-label="Planner">
+      <div class="mission card">
+        <div class="mission-row" id="pickRow"></div>
+        <div class="ctrl-row">
+          <div class="ctrl"><label for="start">First week</label><input id="start" type="date"></div>
+          <div class="ctrl"><span class="lab" id="wLab">Horizon</span>
+            <div class="seg" role="radiogroup" aria-labelledby="wLab" id="weeksSeg">
+              <button type="button" role="radio" data-v="4">4 wks</button><button type="button" role="radio" data-v="8" aria-checked="true">8 wks</button><button type="button" role="radio" data-v="12">12 wks</button>
+            </div></div>
+          <div class="ctrl"><span class="lab" id="bmLab">Budget as</span>
+            <div class="seg" role="radiogroup" aria-labelledby="bmLab" id="bmodeSeg"><button type="button" role="radio" data-v="pct" aria-checked="true">% of today</button><button type="button" role="radio" data-v="inr">₹ maximum</button></div></div>
+          <div class="ctrl grow" id="pctCtrl"><label for="budget">Budget <output id="budgetOut">100%</output> <span class="muted">of today's rule</span></label><input id="budget" type="range" min="60" max="140" step="5" value="100"></div>
+          <div class="ctrl grow" id="inrCtrl" hidden><label for="budgetInr">Maximum budget <output id="inrOut">₹50 L</output></label><div class="inr-box"><span>₹</span><input id="budgetInr" type="number" min="1" step="1" value="50"><select id="inrUnit" aria-label="Unit"><option value="100000" selected>lakh</option><option value="10000000">crore</option></select></div></div>
+          <div class="ctrl"><span class="lab" id="rLab">Risk appetite</span>
+            <div class="seg risk" role="radiogroup" aria-labelledby="rLab" id="riskSeg">
+              <button type="button" role="radio" data-v="careful">🛡 Careful</button><button type="button" role="radio" data-v="balanced" aria-checked="true">⚖ Balanced</button><button type="button" role="radio" data-v="bold">🚀 Bold</button>
+            </div></div>
+          <div class="status" id="status" aria-live="polite"></div>
+        </div>
+        <p class="risk-note" id="riskNote"></p>
+      </div>
+
+      <div class="ctx-grid">
+        <div class="card ctx" id="ctx" aria-live="polite"></div>
+        <div class="card" id="routeCard"></div>
+      </div>
+
+      <div class="kpis" id="kpis"></div>
+
+      <div class="card" id="signals"></div>
+
+      <div class="two">
+        <div class="card"><div class="card-head"><h4>Same plan, three risk appetites</h4><span class="muted small">click to switch</span></div><div class="risk-grid" id="riskGrid"></div></div>
+        <div class="card replay" id="replay"><p class="eyebrow">Proof · replay on last year</p><div class="shimmer-line"></div><div class="shimmer-line short"></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head"><h4>Demand forecast &amp; what to pre-buy</h4><div class="tabs" id="prodTabs" role="tablist" aria-label="Products"></div></div>
+        <div class="chart-wrap"><svg id="demandChart" viewBox="0 0 760 290" role="img" aria-label="Weekly demand forecast and pre-buy quantities"></svg><div class="tip" id="tip"></div></div>
+        <div class="legend"><span><i class="sw band"></i>Forecast range</span><span><i class="sw likely"></i>Likely demand</span><span><i class="sw ly"></i>Last year</span><span><i class="sw ss"></i>STOCKSHOCK pre-buy</span><span><i class="sw today"></i>Today's rule</span></div>
+      </div>
+
+      <div class="two wide">
+        <div class="card">
+          <div class="card-head"><h4>Buy plan</h4><div class="tabs" id="weekTabs" role="tablist" aria-label="Weeks"></div></div>
+          <div class="plan-list" id="planList"></div>
+          <div class="book-bar">
+            <span class="muted" id="bookHint">Book lines into Orders; nothing is charged until you confirm.</span>
+            <div class="row-btns">
+              <button class="btn btn-outline" id="bookWeek" type="button">Book this week's BUY lines</button>
+              <button class="btn btn-volt" id="bookAll" type="button">Book whole plan</button>
+            </div>
+          </div>
+        </div>
+        <div class="card seg-card"><div class="card-head"><h4>Where the budget goes</h4></div><svg id="donut" viewBox="0 0 220 220" aria-hidden="true"></svg><div class="seg-list" id="segList"></div></div>
+      </div>
+
+      <div class="two">
+        <div class="card"><div class="card-head"><h4>Stress test</h4><span class="muted small">profit if demand misses the forecast</span></div><svg id="stressChart" viewBox="0 0 380 220" role="img" aria-label="Profit under demand shocks"></svg><p class="muted small" id="stressNote"></p></div>
+        <div class="card"><div class="card-head"><h4>Pricing &amp; buy-price timing</h4><span class="muted small">recommended sell price vs rate card</span></div><div id="pricing"></div></div>
+      </div>
+
+      <div class="card" id="frontierCard">
+        <div class="card-head"><h4>Inventory as an investment portfolio</h4><span class="muted small" id="frontierNote">Each dot is the best plan at that level of risk.</span></div>
+        <div class="chart-wrap"><svg id="frontierChart" viewBox="0 0 760 300" role="img" aria-label="Risk versus expected profit"></svg></div>
+      </div>
+    </section>
+
+    <!-- RADAR -->
+    <section class="view" data-view="radar" aria-label="Opportunity radar">
+      <div class="ov-head"><div><p class="eyebrow">Opportunity radar</p><h2 class="title">Where, what and when to pre-buy</h2><p class="muted">Scans destinations for rising searches, last year's sell-outs, look-to-book, buy-price timing and margin, then ranks every product and week.</p></div></div>
+      <div class="mission card"><div class="ctrl-row">
+        <div class="ctrl"><span class="lab">Products</span><div class="seg" id="rdKinds" role="radiogroup"><button type="button" role="radio" data-v="" aria-checked="true">All</button><button type="button" role="radio" data-v="flight">✈ Flights</button><button type="button" role="radio" data-v="hotel">🏨 Hotels</button><button type="button" role="radio" data-v="activity,transfer">🎟 Experiences</button></div></div>
+        <div class="ctrl"><span class="lab">Horizon</span><div class="seg" id="rdWeeks" role="radiogroup"><button type="button" role="radio" data-v="4">4 wks</button><button type="button" role="radio" data-v="8" aria-checked="true">8 wks</button><button type="button" role="radio" data-v="12">12 wks</button></div></div>
+        <div class="pick"><label for="rdAdd">Also scan</label><div class="pick-box"><span class="code">+</span><input id="rdAdd" type="search" autocomplete="off" placeholder="Add any city to the scan…"><div class="suggest" id="rdAddSug" role="listbox"></div></div></div>
+        <div class="status" id="rdStatus"></div>
+      </div><div class="chips" id="rdExtra"></div></div>
+      <div class="card"><div class="table-wrap"><table class="orders radar"><thead><tr><th>Score</th><th>Destination</th><th>Product</th><th>Best week</th><th class="r">Demand</th><th class="r">Searches</th><th class="r">Sold out LY</th><th>Buy price</th><th class="r">Margin</th><th>Why</th><th></th></tr></thead><tbody id="rdBody"></tbody></table></div></div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section class="view" data-view="portfolio" aria-label="Portfolio">
+      <div class="ov-head"><div><p class="eyebrow">Portfolio optimiser</p><h2 class="title">One budget. Every destination. One plan.</h2><p class="muted">Enter the maximum budget TBO gives you. STOCKSHOCK splits it across destinations, hotels, flights, experiences and weeks to maximise risk-adjusted profit.</p></div></div>
+      <div class="mission card">
+        <div class="mission-row">
+          <div class="ctrl"><label for="pfBudget">Maximum budget <output id="pfOut">₹3 Cr</output></label><div class="inr-box"><span>₹</span><input id="pfBudget" type="number" min="1" step="1" value="3"><select id="pfUnit" aria-label="Unit"><option value="100000">lakh</option><option value="10000000" selected>crore</option></select></div></div>
+          <div class="pick"><label for="pfAdd">Destinations (up to 8)</label><div class="pick-box"><span class="code">+</span><input id="pfAdd" type="search" autocomplete="off" placeholder="Add any city…"><div class="suggest" id="pfAddSug" role="listbox"></div></div></div>
+          <button class="btn btn-outline" id="pfFromRadar" type="button">📡 Add radar's top picks</button>
+        </div>
+        <div class="chips dest-chips" id="pfDests"></div>
+        <div class="ctrl-row" style="margin-top:12px">
+          <div class="ctrl"><span class="lab">Products</span><div class="chipset" id="pfKinds"><button class="fchip" type="button" data-k="flight" aria-pressed="true">✈ Flights</button><button class="fchip" type="button" data-k="hotel" aria-pressed="true">🏨 Hotels</button><button class="fchip" type="button" data-k="activity,transfer" aria-pressed="true">🎟 Experiences</button></div></div>
+          <div class="ctrl"><span class="lab">Horizon</span><div class="seg" id="pfWeeks" role="radiogroup"><button type="button" role="radio" data-v="4">4 wks</button><button type="button" role="radio" data-v="8" aria-checked="true">8 wks</button><button type="button" role="radio" data-v="12">12 wks</button></div></div>
+          <div class="ctrl"><span class="lab">Risk appetite</span><div class="seg risk" id="pfRisk" role="radiogroup"><button type="button" role="radio" data-v="careful">🛡 Careful</button><button type="button" role="radio" data-v="balanced" aria-checked="true">⚖ Balanced</button><button type="button" role="radio" data-v="bold">🚀 Bold</button></div></div>
+          <div class="status" id="pfStatus"></div>
+        </div>
+      </div>
+      <div class="kpis" id="pfKpis"></div>
+      <div class="two">
+        <div class="card"><div class="card-head"><h4>Budget by destination</h4><span class="muted small" id="pfUsed"></span></div><div id="pfByDest"></div></div>
+        <div class="card"><div class="card-head"><h4>Budget by week</h4><span class="muted small">stacked by destination</span></div><svg id="pfWeekChart" viewBox="0 0 380 220" aria-hidden="true"></svg></div>
+      </div>
+      <div class="two">
+        <div class="card"><div class="card-head"><h4>Same budget, three risk appetites</h4></div><div class="risk-grid" id="pfRiskGrid"></div></div>
+        <div class="card"><div class="card-head"><h4>Stress test</h4><span class="muted small">whole portfolio</span></div><svg id="pfStress" viewBox="0 0 380 220" aria-hidden="true"></svg></div>
+      </div>
+      <div class="card">
+        <div class="card-head"><h4>Portfolio buy list</h4><div class="row-btns"><span class="muted small" id="pfCount"></span><button class="btn btn-volt" id="pfBookAll" type="button">Book whole portfolio</button></div></div>
+        <div class="table-wrap"><table class="orders"><thead><tr><th>Destination</th><th>Product</th><th>Week</th><th>Action</th><th class="r">Qty</th><th class="r">Sell price</th><th class="r">Spend</th><th>Why</th><th></th></tr></thead><tbody id="pfLines"></tbody></table></div>
+      </div>
+    </section>
+
+    <!-- ORDERS -->
+    <section class="view" data-view="orders" aria-label="Orders">
+      <div class="ov-head"><div><p class="eyebrow">Orders</p><h2 class="title">Every pre-buy, across every module</h2><p class="muted">Pending lines are reserved in the console. Confirm to place the order with suppliers.</p></div></div>
+      <div class="kpis" id="ordKpis"></div>
+      <div class="card">
+        <div class="card-head">
+          <div class="tabs" id="ordFilter" role="tablist" aria-label="Filter orders">
+            <button class="tab" role="tab" data-f="all" aria-selected="true">All</button><button class="tab" role="tab" data-f="portfolio">💼 Portfolio</button><button class="tab" role="tab" data-f="flights">✈ Flights</button><button class="tab" role="tab" data-f="hotels">🏨 Hotels</button><button class="tab" role="tab" data-f="experiences">🎟 Experiences</button>
+          </div>
+          <div class="row-btns"><button class="btn btn-outline" id="clearCancelled" type="button">Clear cancelled</button><button class="btn btn-volt" id="confirmAll" type="button">Confirm all pending</button></div>
+        </div>
+        <div class="table-wrap"><table class="orders"><thead><tr><th>Order</th><th>Item</th><th>Where</th><th>Week</th><th class="r">Qty</th><th class="r">Sell at</th><th class="r">Total cost</th><th>Status</th><th></th></tr></thead><tbody id="ordBody"></tbody></table></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>

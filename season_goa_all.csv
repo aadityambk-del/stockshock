@@ -1,0 +1,225 @@
+week,kind,product,demand,q,qt
+2025-01-06,hotel,Beachfront 5★ resort,35,60.0,100.0
+2025-01-13,hotel,Beachfront 5★ resort,114,35.0,100.0
+2025-01-20,hotel,Beachfront 5★ resort,45,45.0,100.0
+2025-01-27,hotel,Beachfront 5★ resort,119,65.0,100.0
+2025-02-03,hotel,Beachfront 5★ resort,57,40.0,55.0
+2025-02-10,hotel,Beachfront 5★ resort,76,50.0,55.0
+2025-02-17,hotel,Beachfront 5★ resort,60,30.0,55.0
+2025-02-24,hotel,Beachfront 5★ resort,25,30.0,55.0
+2025-01-06,hotel,Boutique 3★ hotel,148,65.0,125.0
+2025-01-13,hotel,Boutique 3★ hotel,101,35.0,125.0
+2025-01-20,hotel,Boutique 3★ hotel,124,65.0,125.0
+2025-01-27,hotel,Boutique 3★ hotel,54,75.0,125.0
+2025-02-03,hotel,Boutique 3★ hotel,113,60.0,85.0
+2025-02-10,hotel,Boutique 3★ hotel,52,55.0,85.0
+2025-02-17,hotel,Boutique 3★ hotel,97,60.0,85.0
+2025-02-24,hotel,Boutique 3★ hotel,99,65.0,85.0
+2025-01-06,flight,DEL→GOI seat block,220,120.0,325.0
+2025-01-13,flight,DEL→GOI seat block,158,130.0,325.0
+2025-01-20,flight,DEL→GOI seat block,338,135.0,325.0
+2025-01-27,flight,DEL→GOI seat block,553,230.0,325.0
+2025-02-03,flight,DEL→GOI seat block,286,100.0,215.0
+2025-02-10,flight,DEL→GOI seat block,197,65.0,215.0
+2025-02-17,flight,DEL→GOI seat block,373,80.0,215.0
+2025-02-24,flight,DEL→GOI seat block,80,125.0,215.0
+2025-01-06,activity,Water-sports & cruise pass,413,260.0,275.0
+2025-01-13,activity,Water-sports & cruise pass,159,140.0,275.0
+2025-01-20,activity,Water-sports & cruise pass,243,185.0,275.0
+2025-01-27,activity,Water-sports & cruise pass,541,360.0,275.0
+2025-02-03,activity,Water-sports & cruise pass,456,185.0,175.0
+2025-02-10,activity,Water-sports & cruise pass,193,240.0,175.0
+2025-02-17,activity,Water-sports & cruise pass,287,170.0,175.0
+2025-02-24,activity,Water-sports & cruise pass,174,195.0,175.0
+2025-03-03,hotel,Beachfront 5★ resort,43,55.0,45.0
+2025-03-10,hotel,Beachfront 5★ resort,64,35.0,45.0
+2025-03-17,hotel,Beachfront 5★ resort,55,30.0,45.0
+2025-03-24,hotel,Beachfront 5★ resort,57,65.0,45.0
+2025-03-31,hotel,Beachfront 5★ resort,33,50.0,45.0
+2025-04-07,hotel,Beachfront 5★ resort,27,50.0,50.0
+2025-04-14,hotel,Beachfront 5★ resort,59,35.0,50.0
+2025-04-21,hotel,Beachfront 5★ resort,48,35.0,50.0
+2025-03-03,hotel,Boutique 3★ hotel,114,45.0,85.0
+2025-03-10,hotel,Boutique 3★ hotel,131,50.0,85.0
+2025-03-17,hotel,Boutique 3★ hotel,77,60.0,85.0
+2025-03-24,hotel,Boutique 3★ hotel,56,55.0,85.0
+2025-03-31,hotel,Boutique 3★ hotel,56,70.0,85.0
+2025-04-07,hotel,Boutique 3★ hotel,56,60.0,55.0
+2025-04-14,hotel,Boutique 3★ hotel,70,65.0,55.0
+2025-04-21,hotel,Boutique 3★ hotel,43,55.0,55.0
+2025-03-03,flight,DEL→GOI seat block,280,145.0,220.0
+2025-03-10,flight,DEL→GOI seat block,188,175.0,220.0
+2025-03-17,flight,DEL→GOI seat block,224,85.0,220.0
+2025-03-24,flight,DEL→GOI seat block,259,105.0,220.0
+2025-03-31,flight,DEL→GOI seat block,191,70.0,220.0
+2025-04-07,flight,DEL→GOI seat block,130,90.0,180.0
+2025-04-14,flight,DEL→GOI seat block,160,120.0,180.0
+2025-04-21,flight,DEL→GOI seat block,301,130.0,180.0
+2025-03-03,activity,Water-sports & cruise pass,121,170.0,195.0
+2025-03-10,activity,Water-sports & cruise pass,135,195.0,195.0
+2025-03-17,activity,Water-sports & cruise pass,194,245.0,195.0
+2025-03-24,activity,Water-sports & cruise pass,192,265.0,195.0
+2025-03-31,activity,Water-sports & cruise pass,146,280.0,195.0
+2025-04-07,activity,Water-sports & cruise pass,106,190.0,170.0
+2025-04-14,activity,Water-sports & cruise pass,148,255.0,170.0
+2025-04-21,activity,Water-sports & cruise pass,161,165.0,170.0
+2025-04-28,hotel,Beachfront 5★ resort,28,50.0,50.0
+2025-05-05,hotel,Beachfront 5★ resort,24,35.0,35.0
+2025-05-12,hotel,Beachfront 5★ resort,40,40.0,35.0
+2025-05-19,hotel,Beachfront 5★ resort,35,50.0,35.0
+2025-05-26,hotel,Beachfront 5★ resort,17,45.0,35.0
+2025-06-02,hotel,Beachfront 5★ resort,67,40.0,20.0
+2025-06-09,hotel,Beachfront 5★ resort,36,35.0,20.0
+2025-06-16,hotel,Beachfront 5★ resort,56,15.0,20.0
+2025-04-28,hotel,Boutique 3★ hotel,85,40.0,50.0
+2025-05-05,hotel,Boutique 3★ hotel,86,25.0,50.0
+2025-05-12,hotel,Boutique 3★ hotel,56,45.0,50.0
+2025-05-19,hotel,Boutique 3★ hotel,99,75.0,50.0
+2025-05-26,hotel,Boutique 3★ hotel,70,65.0,50.0
+2025-06-02,hotel,Boutique 3★ hotel,116,50.0,30.0
+2025-06-09,hotel,Boutique 3★ hotel,61,45.0,30.0
+2025-06-16,hotel,Boutique 3★ hotel,30,35.0,30.0
+2025-04-28,flight,DEL→GOI seat block,306,50.0,280.0
+2025-05-05,flight,DEL→GOI seat block,178,90.0,195.0
+2025-05-12,flight,DEL→GOI seat block,227,70.0,195.0
+2025-05-19,flight,DEL→GOI seat block,221,125.0,195.0
+2025-05-26,flight,DEL→GOI seat block,215,65.0,195.0
+2025-06-02,flight,DEL→GOI seat block,206,110.0,160.0
+2025-06-09,flight,DEL→GOI seat block,145,60.0,160.0
+2025-06-16,flight,DEL→GOI seat block,107,65.0,160.0
+2025-04-28,activity,Water-sports & cruise pass,175,205.0,140.0
+2025-05-05,activity,Water-sports & cruise pass,100,145.0,155.0
+2025-05-12,activity,Water-sports & cruise pass,122,200.0,155.0
+2025-05-19,activity,Water-sports & cruise pass,151,200.0,155.0
+2025-05-26,activity,Water-sports & cruise pass,174,285.0,155.0
+2025-06-02,activity,Water-sports & cruise pass,123,195.0,85.0
+2025-06-09,activity,Water-sports & cruise pass,95,175.0,85.0
+2025-06-16,activity,Water-sports & cruise pass,69,115.0,85.0
+2025-06-23,hotel,Beachfront 5★ resort,8,40.0,30.0
+2025-06-30,hotel,Beachfront 5★ resort,19,35.0,30.0
+2025-07-07,hotel,Beachfront 5★ resort,27,30.0,30.0
+2025-07-14,hotel,Beachfront 5★ resort,19,40.0,30.0
+2025-07-21,hotel,Beachfront 5★ resort,37,30.0,30.0
+2025-07-28,hotel,Beachfront 5★ resort,27,30.0,30.0
+2025-08-04,hotel,Beachfront 5★ resort,36,25.0,20.0
+2025-08-11,hotel,Beachfront 5★ resort,20,25.0,20.0
+2025-06-23,hotel,Boutique 3★ hotel,49,40.0,40.0
+2025-06-30,hotel,Boutique 3★ hotel,29,15.0,40.0
+2025-07-07,hotel,Boutique 3★ hotel,37,30.0,35.0
+2025-07-14,hotel,Boutique 3★ hotel,12,35.0,35.0
+2025-07-21,hotel,Boutique 3★ hotel,44,55.0,35.0
+2025-07-28,hotel,Boutique 3★ hotel,28,40.0,35.0
+2025-08-04,hotel,Boutique 3★ hotel,35,40.0,30.0
+2025-08-11,hotel,Boutique 3★ hotel,23,30.0,30.0
+2025-06-23,flight,DEL→GOI seat block,110,45.0,135.0
+2025-06-30,flight,DEL→GOI seat block,211,50.0,135.0
+2025-07-07,flight,DEL→GOI seat block,172,65.0,125.0
+2025-07-14,flight,DEL→GOI seat block,117,70.0,125.0
+2025-07-21,flight,DEL→GOI seat block,107,40.0,125.0
+2025-07-28,flight,DEL→GOI seat block,222,50.0,125.0
+2025-08-04,flight,DEL→GOI seat block,102,60.0,120.0
+2025-08-11,flight,DEL→GOI seat block,128,50.0,120.0
+2025-06-23,activity,Water-sports & cruise pass,125,75.0,60.0
+2025-06-30,activity,Water-sports & cruise pass,65,70.0,60.0
+2025-07-07,activity,Water-sports & cruise pass,136,110.0,70.0
+2025-07-14,activity,Water-sports & cruise pass,43,120.0,70.0
+2025-07-21,activity,Water-sports & cruise pass,118,120.0,70.0
+2025-07-28,activity,Water-sports & cruise pass,115,60.0,70.0
+2025-08-04,activity,Water-sports & cruise pass,60,125.0,75.0
+2025-08-11,activity,Water-sports & cruise pass,185,95.0,75.0
+2025-08-18,hotel,Beachfront 5★ resort,40,20.0,20.0
+2025-08-25,hotel,Beachfront 5★ resort,28,20.0,20.0
+2025-09-01,hotel,Beachfront 5★ resort,25,20.0,30.0
+2025-09-08,hotel,Beachfront 5★ resort,23,35.0,30.0
+2025-09-15,hotel,Beachfront 5★ resort,34,25.0,30.0
+2025-09-22,hotel,Beachfront 5★ resort,21,25.0,30.0
+2025-09-29,hotel,Beachfront 5★ resort,45,35.0,30.0
+2025-10-06,hotel,Beachfront 5★ resort,23,30.0,45.0
+2025-08-18,hotel,Boutique 3★ hotel,53,20.0,30.0
+2025-08-25,hotel,Boutique 3★ hotel,21,15.0,30.0
+2025-09-01,hotel,Boutique 3★ hotel,35,30.0,50.0
+2025-09-08,hotel,Boutique 3★ hotel,24,55.0,50.0
+2025-09-15,hotel,Boutique 3★ hotel,52,40.0,50.0
+2025-09-22,hotel,Boutique 3★ hotel,23,35.0,50.0
+2025-09-29,hotel,Boutique 3★ hotel,39,45.0,50.0
+2025-10-06,hotel,Boutique 3★ hotel,53,35.0,70.0
+2025-08-18,flight,DEL→GOI seat block,106,45.0,130.0
+2025-08-25,flight,DEL→GOI seat block,67,80.0,130.0
+2025-09-01,flight,DEL→GOI seat block,158,65.0,165.0
+2025-09-08,flight,DEL→GOI seat block,129,60.0,165.0
+2025-09-15,flight,DEL→GOI seat block,163,45.0,165.0
+2025-09-22,flight,DEL→GOI seat block,274,45.0,165.0
+2025-09-29,flight,DEL→GOI seat block,342,65.0,165.0
+2025-10-06,flight,DEL→GOI seat block,102,65.0,220.0
+2025-08-18,activity,Water-sports & cruise pass,69,70.0,65.0
+2025-08-25,activity,Water-sports & cruise pass,87,40.0,65.0
+2025-09-01,activity,Water-sports & cruise pass,104,70.0,105.0
+2025-09-08,activity,Water-sports & cruise pass,74,100.0,105.0
+2025-09-15,activity,Water-sports & cruise pass,118,100.0,105.0
+2025-09-22,activity,Water-sports & cruise pass,146,70.0,105.0
+2025-09-29,activity,Water-sports & cruise pass,185,195.0,105.0
+2025-10-06,activity,Water-sports & cruise pass,131,140.0,175.0
+2025-10-13,hotel,Beachfront 5★ resort,40,40.0,45.0
+2025-10-20,hotel,Beachfront 5★ resort,69,50.0,45.0
+2025-10-27,hotel,Beachfront 5★ resort,79,40.0,45.0
+2025-11-03,hotel,Beachfront 5★ resort,19,65.0,75.0
+2025-11-10,hotel,Beachfront 5★ resort,32,50.0,75.0
+2025-11-17,hotel,Beachfront 5★ resort,46,45.0,75.0
+2025-11-24,hotel,Beachfront 5★ resort,103,35.0,75.0
+2025-12-01,hotel,Beachfront 5★ resort,193,45.0,95.0
+2025-10-13,hotel,Boutique 3★ hotel,44,55.0,90.0
+2025-10-20,hotel,Boutique 3★ hotel,175,50.0,90.0
+2025-10-27,hotel,Boutique 3★ hotel,81,55.0,90.0
+2025-11-03,hotel,Boutique 3★ hotel,55,85.0,90.0
+2025-11-10,hotel,Boutique 3★ hotel,79,90.0,90.0
+2025-11-17,hotel,Boutique 3★ hotel,229,45.0,90.0
+2025-11-24,hotel,Boutique 3★ hotel,145,50.0,90.0
+2025-12-01,hotel,Boutique 3★ hotel,151,40.0,145.0
+2025-10-13,flight,DEL→GOI seat block,269,125.0,280.0
+2025-10-20,flight,DEL→GOI seat block,211,115.0,280.0
+2025-10-27,flight,DEL→GOI seat block,135,80.0,280.0
+2025-11-03,flight,DEL→GOI seat block,221,80.0,185.0
+2025-11-10,flight,DEL→GOI seat block,222,65.0,185.0
+2025-11-17,flight,DEL→GOI seat block,376,65.0,185.0
+2025-11-24,flight,DEL→GOI seat block,217,125.0,185.0
+2025-12-01,flight,DEL→GOI seat block,506,160.0,305.0
+2025-10-13,activity,Water-sports & cruise pass,225,190.0,160.0
+2025-10-20,activity,Water-sports & cruise pass,118,140.0,160.0
+2025-10-27,activity,Water-sports & cruise pass,144,170.0,160.0
+2025-11-03,activity,Water-sports & cruise pass,232,210.0,165.0
+2025-11-10,activity,Water-sports & cruise pass,120,170.0,165.0
+2025-11-17,activity,Water-sports & cruise pass,158,170.0,165.0
+2025-11-24,activity,Water-sports & cruise pass,374,270.0,165.0
+2025-12-01,activity,Water-sports & cruise pass,244,345.0,395.0
+2025-12-08,hotel,Beachfront 5★ resort,77,70.0,110.0
+2025-12-15,hotel,Beachfront 5★ resort,118,55.0,110.0
+2025-12-22,hotel,Beachfront 5★ resort,160,60.0,110.0
+2025-12-29,hotel,Beachfront 5★ resort,99,75.0,110.0
+2026-01-05,hotel,Beachfront 5★ resort,51,55.0,70.0
+2026-01-12,hotel,Beachfront 5★ resort,117,50.0,70.0
+2026-01-19,hotel,Beachfront 5★ resort,128,50.0,70.0
+2026-01-26,hotel,Beachfront 5★ resort,145,55.0,70.0
+2025-12-08,hotel,Boutique 3★ hotel,69,80.0,165.0
+2025-12-15,hotel,Boutique 3★ hotel,177,85.0,165.0
+2025-12-22,hotel,Boutique 3★ hotel,242,115.0,165.0
+2025-12-29,hotel,Boutique 3★ hotel,109,115.0,165.0
+2026-01-05,hotel,Boutique 3★ hotel,65,65.0,115.0
+2026-01-12,hotel,Boutique 3★ hotel,201,60.0,115.0
+2026-01-19,hotel,Boutique 3★ hotel,177,90.0,115.0
+2026-01-26,hotel,Boutique 3★ hotel,135,75.0,115.0
+2025-12-08,flight,DEL→GOI seat block,283,175.0,290.0
+2025-12-15,flight,DEL→GOI seat block,277,180.0,290.0
+2025-12-22,flight,DEL→GOI seat block,323,240.0,290.0
+2025-12-29,flight,DEL→GOI seat block,436,155.0,290.0
+2026-01-05,flight,DEL→GOI seat block,317,170.0,280.0
+2026-01-12,flight,DEL→GOI seat block,389,180.0,280.0
+2026-01-19,flight,DEL→GOI seat block,267,185.0,280.0
+2026-01-26,flight,DEL→GOI seat block,385,265.0,280.0
+2025-12-08,activity,Water-sports & cruise pass,149,295.0,325.0
+2025-12-15,activity,Water-sports & cruise pass,494,250.0,325.0
+2025-12-22,activity,Water-sports & cruise pass,586,255.0,325.0
+2025-12-29,activity,Water-sports & cruise pass,932,460.0,325.0
+2026-01-05,activity,Water-sports & cruise pass,294,435.0,325.0
+2026-01-12,activity,Water-sports & cruise pass,214,205.0,325.0
+2026-01-19,activity,Water-sports & cruise pass,283,320.0,325.0
+2026-01-26,activity,Water-sports & cruise pass,552,220.0,325.0
